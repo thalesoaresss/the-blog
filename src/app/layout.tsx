@@ -10,7 +10,7 @@ type RootLayoutProps = {
 };
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="pt-br" >
+    <html lang="pt-BR" >
       <body>{children}</body>
     </html>
   );
