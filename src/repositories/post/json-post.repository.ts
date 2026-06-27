@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { PostRepository } from './post.repository';
+import { PostRepository } from './post.repository.interface';
 import { readFile } from 'fs/promises';
 import { PostModel } from '@/models/post/post.model';
 
@@ -26,14 +26,15 @@ export class JsonPostRepository implements PostRepository {
     return posts;
   }
 
-  async findAllPosts(): Promise<PostModel[]> {
+  async findAllPublishedPosts(): Promise<PostModel[]> {
     await this.simulateWait();
     const posts = await this.readFromDisk();
-    return posts;
+    return posts.filter(post => post.published === true);
   }
+
   async findById(id: string): Promise<PostModel> {
     await this.simulateWait();
-    const posts = await this.findAllPosts();
+    const posts = await this.findAllPublishedPosts();
     const post = posts.find(post => post.id === id);
     if (!post) throw new Error('Post não encontrado');
     return post;
