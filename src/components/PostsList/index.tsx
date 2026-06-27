@@ -1,9 +1,9 @@
 import { PostCoverImage } from '../PostCoverImage';
 import { PostSumary } from '../PostSumary';
-import { findAllPublishedPosts } from '@/lib/post/queries';
+import { findAllPublishedPostsCached } from '@/lib/post/queries';
 
 export async function PostsList() {
-  const posts = await findAllPublishedPosts();
+  const posts = await findAllPublishedPostsCached();
 
   return (
     <div className='grid grid-cols-1 pb-16 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
